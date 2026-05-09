@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Resume Analyzer
 
-## Getting Started
+AI-powered Resume Analyzer and Resume Improvement platform built with Next.js, TypeScript, and Google Gemini AI.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+* 📄 Upload and analyze resumes
+* 🤖 AI-powered resume improvement suggestions
+* 🎯 ATS-style resume analysis
+* 🧠 AI-generated recommendations based on job descriptions
+* 📥 Export improved resumes as PDF
+* ⚡ Real-time streaming AI responses
+* 🌙 Modern responsive UI
+* 🔥 Built with Next.js App Router
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* shadcn/ui
+* Framer Motion
+* Lucide React
+
+### AI & Backend
+
+* Google Gemini AI API
+* Next.js Route Handlers
+
+### Utilities
+
+* jsPDF
+* Sonner
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+app/
+ ├── api/
+ ├── components/
+ ├── hooks/
+ ├── lib/
+ ├── styles/
+ └── page.tsx
+
+public/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 👨‍💻 Author
 
-## Learn More
+Mohamed Zaher Taha
 
-To learn more about Next.js, take a look at the following resources:
+* Frontend / Full Stack Web Developer
+* React & Next.js Developer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+GitHub: [https://github.com/MoZaher2](https://github.com/MoZaher2)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+LinkedIn: [https://www.linkedin.com/in/mohamed-zaher-83678a316/](https://www.linkedin.com/in/mohamed-zaher-83678a316/)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
