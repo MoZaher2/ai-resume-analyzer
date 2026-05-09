@@ -8,7 +8,7 @@ import { AnalyzeRequest } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2, FileText, UploadCloud } from "lucide-react";
+import { Loader2, FileText, UploadCloud, BriefcaseBusiness } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -17,7 +17,7 @@ interface InputFormProps {
   isLoading: boolean;
 }
 
-export function InputForm({ onSubmit, isLoading }: InputFormProps) {
+export function ResumeAnalyzer({ onSubmit, isLoading }: InputFormProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [pdfFileName, setPdfFileName] = useState<string | null>(null);
 
@@ -64,7 +64,7 @@ export function InputForm({ onSubmit, isLoading }: InputFormProps) {
       setValue("resume", data.text, { shouldValidate: true, shouldDirty: true });
       setPdfFileName(file.name);
       toast.success("Resume parsed successfully!");
-    } catch (error: any) {
+    } catch (error: { message: string }) {
       toast.error(error.message || "Error reading PDF. Please try again.");
     } finally {
       setIsUploading(false);
@@ -85,15 +85,18 @@ export function InputForm({ onSubmit, isLoading }: InputFormProps) {
           <Card className="border-border/50 bg-background/50 backdrop-blur">
             <CardContent className="p-6 space-y-4">
               <div className="space-y-2">
-                <label className="text-lg font-semibold block">Your Resume</label>
+                <label className="text-lg font-semibold flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" />
+                  Your Resume
+                </label>
                 <p className="text-sm text-muted-foreground">Upload your current resume as a PDF file.</p>
               </div>
               <div className="flex flex-col items-center justify-center border-2 border-dashed border-muted-foreground/25 rounded-md p-8 min-h-[300px] bg-background/50 relative transition-colors hover:bg-muted/50 group">
-                <input 
-                  type="file" 
-                  accept=".pdf,application/pdf" 
+                <input
+                  type="file"
+                  accept=".pdf,application/pdf"
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                  onChange={handleFileUpload} 
+                  onChange={handleFileUpload}
                   disabled={isUploading}
                 />
                 {isUploading ? (
@@ -125,12 +128,15 @@ export function InputForm({ onSubmit, isLoading }: InputFormProps) {
           <Card className="border-border/50 bg-background/50 backdrop-blur">
             <CardContent className="p-6 space-y-4">
               <div className="space-y-2">
-                <label htmlFor="jobDescription" className="text-lg font-semibold block">Job Description</label>
+                <label className="text-lg font-semibold flex items-center gap-2">
+                  <BriefcaseBusiness className="h-5 w-5 text-primary" />
+                  Job Description
+                </label>
                 <p className="text-sm text-muted-foreground">Paste the target job description here.</p>
               </div>
               <Textarea
                 id="jobDescription"
-                placeholder="Seeking a Frontend Developer experienced with React..."
+                placeholder="We are looking for a highly skilled developer..."
                 className="min-h-[300px] resize-y bg-background focus-visible:ring-1"
                 {...register("jobDescription")}
               />
@@ -159,6 +165,8 @@ export function InputForm({ onSubmit, isLoading }: InputFormProps) {
           </Button>
         </div>
       </form>
-    </motion.div>
+    </motion.div >
   );
 }
+
+
