@@ -15,7 +15,7 @@ export function Navbar() {
         </div>
         <div className="flex items-center space-x-2">
           <Link
-            href="https://github.com/Mohamed-Zaher"
+            href="https://github.com/MoZaher2/ai-resume-analyzer"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex h-9 w-9 items-center justify-center rounded-md border border-transparent text-muted-foreground transition-all duration-300 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-white"
