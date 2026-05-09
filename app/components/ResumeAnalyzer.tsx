@@ -64,7 +64,7 @@ export function ResumeAnalyzer({ onSubmit, isLoading }: InputFormProps) {
       setValue("resume", data.text, { shouldValidate: true, shouldDirty: true });
       setPdfFileName(file.name);
       toast.success("Resume parsed successfully!");
-    } catch (error: { message: string }) {
+    } catch (error: any) {
       toast.error(error.message || "Error reading PDF. Please try again.");
     } finally {
       setIsUploading(false);
