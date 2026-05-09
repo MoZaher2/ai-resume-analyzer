@@ -37,7 +37,6 @@ export async function POST(req: Request) {
     if (!text || text.trim() === "") {
       return NextResponse.json({ error: "Could not extract text from PDF. It may be scanned or empty." }, { status: 400 });
     }
-    console.log({ text })
     return NextResponse.json({ text });
   } catch (error: any) {
     console.error("PDF Parsing Error:", error);
