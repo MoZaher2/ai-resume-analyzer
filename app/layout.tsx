@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "AI Resume Analyzer",
     images: [
       {
-        url: "/logo.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "AI Resume Analyzer Preview",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: "AI Resume Analyzer",
     description:
       "Optimize your resume with AI, improve ATS score, and land more interviews.",
-    images: ["/logo.png"],
+    images: ["/og-image.png"],
   },
 
   icons: {
