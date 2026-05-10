@@ -98,9 +98,7 @@ public/
 
 ## 🌍 Live Demo
 
-```bash
-https://ai-resume-analyzer-beryl-theta.vercel.app/
-```
+AI Resume Analyzer: [https://ai-resume-analyzer-beryl-theta.vercel.app/](https://ai-resume-analyzer-beryl-theta.vercel.app/)
 
 ---
 
@@ -114,6 +112,6 @@ https://ai-resume-analyzer-beryl-theta.vercel.app/
 
 GitHub: [https://github.com/MoZaher2](https://github.com/MoZaher2)
 
-LinkedIn: [https://www.linkedin.com/in/mohamed-zaher-83678a316/](www.linkedin.com/in/mohamedzaher-dev)
+LinkedIn: [www.linkedin.com/in/mohamedzaher-dev](www.linkedin.com/in/mohamedzaher-dev)
 
 ---
