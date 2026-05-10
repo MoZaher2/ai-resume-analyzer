@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Mail, MessageCircle, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/customIcons";
-
+import logo from "@/public/logo.png"
+import Image from "next/image";
 
 
 const socialLinks = [
@@ -47,12 +48,18 @@ export function Footer() {
         <div className="flex flex-col items-center justify-center text-center">
           {/* Brand Section */}
           <Link href="/" className="flex items-center gap-2 group mb-6">
-            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-105 group-hover:bg-primary/20">
-              <Sparkles className="h-7 w-7" />
+            <div className="relative flex items-center justify-center transition-all duration-300 group-hover:scale-105">
+              <Image
+                src={logo}
+                alt="logo"
+                width={60}
+                height={60}
+              />
             </div>
-            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-2xl font-bold text-transparent tracking-tight">
+            <span className="bg-gradient-to-r from-rose-800 to-stone-600 bg-clip-text text-transparent text-2xl font-bold text-transparent tracking-tight">
               AI Resume Analyzer
             </span>
+
           </Link>
           <p className="text-sm leading-6 text-muted-foreground max-w-md mx-auto mb-8">
             AI-powered resume analysis and cover letter generation platform. Elevate your career with data-driven insights.

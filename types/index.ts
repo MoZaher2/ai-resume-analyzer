@@ -13,3 +13,12 @@ export interface AnalyzeRequest {
   resume: string;
   jobDescription: string;
 }
+
+export interface InterviewQuestion {
+  question: string;
+  answer: string;
+}
+
+export interface InterviewResponse {
+  questions: InterviewQuestion[];
+}

@@ -10,14 +10,17 @@ import { SkillGapAnalysis } from "./components/SkillGapAnalysis";
 import { KeywordHighlighter } from "./components/KeywordHighlighter";
 import { CoverLetterGenerator } from "./components/CoverLetterGenerator";
 import { ResumeImprover } from "./components/ResumeImprover";
+import { InterviewQuestions } from "./components/InterviewQuestions";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
-import { Wand2, LineChart } from "lucide-react";
+import { Wand2, LineChart, MessageSquare } from "lucide-react";
+import { InterviewGenerator } from "./components/InterviewGenerator";
+import { useInterviewQuestions } from "./hooks/useInterviewQuestions";
 
 export default function Home() {
   const { mutate: analyze, isPending, data: analysis, error } = useAnalyzeResume();
   const [requestData, setRequestData] = useState<AnalyzeRequest | null>(null);
-  const [activeTab, setActiveTab] = useState<"analyzer" | "improver">("analyzer");
+  const [activeTab, setActiveTab] = useState<"analyzer" | "improver" | "interview">("analyzer");
 
   const handleSubmit = (data: AnalyzeRequest) => {
     setRequestData(data);
@@ -35,31 +38,98 @@ export default function Home() {
     <div className="container mx-auto py-8">
       <Hero />
       {/* Tab Switcher */}
-      <div className="flex justify-center mt-8 mb-12">
-        <div className="inline-flex items-center p-1 bg-muted/50 rounded-xl border border-border/50 backdrop-blur-xl">
+      <div className="flex justify-center mt-8 mb-12 px-2">
+        <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-2 p-2 bg-muted/50 rounded-2xl border border-border/50 backdrop-blur-xl">
+
           <button
             onClick={() => setActiveTab("analyzer")}
-            className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${activeTab === "analyzer"
-                ? "bg-background shadow-sm text-primary"
-                : "text-muted-foreground hover:text-foreground"
+            className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 w-full sm:w-auto ${activeTab === "analyzer"
+              ? "bg-background shadow-sm text-primary"
+              : "text-muted-foreground hover:text-foreground hover:bg-background/50"
               }`}
           >
-            <LineChart className="w-4 h-4" />
-            Resume Analyzer
+            <LineChart className="w-4 h-4 shrink-0" />
+            <span className="truncate">Resume Analyzer</span>
           </button>
+
           <button
             onClick={() => setActiveTab("improver")}
-            className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${activeTab === "improver"
-                ? "bg-background shadow-sm text-primary"
-                : "text-muted-foreground hover:text-foreground"
+            className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 w-full sm:w-auto ${activeTab === "improver"
+              ? "bg-background shadow-sm text-primary"
+              : "text-muted-foreground hover:text-foreground hover:bg-background/50"
               }`}
           >
-            <Wand2 className="w-4 h-4" />
-            AI Resume Improver
+            <Wand2 className="w-4 h-4 shrink-0" />
+            <span className="truncate">Resume Improver</span>
           </button>
+
+          <button
+            onClick={() => setActiveTab("interview")}
+            className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 w-full sm:w-auto ${activeTab === "interview"
+              ? "bg-background shadow-sm text-primary"
+              : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+              }`}
+          >
+            <MessageSquare className="w-4 h-4 shrink-0" />
+            <span className="truncate">Interview Generator</span>
+          </button>
+
         </div>
       </div>
+      {/* Feature Description */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.35 }}
+          className="max-w-3xl mx-auto text-center mb-12 px-4"
+        >
+          {activeTab === "analyzer" && (
+            <div>
+              <h2 className="text-2xl font-bold mb-3">
+                AI Resume Analyzer
+              </h2>
 
+              <p className="text-muted-foreground leading-relaxed">
+                Analyze your resume against a job description using AI.
+                Get a match score, discover missing skills, highlight
+                important keywords, and receive personalized feedback
+                to improve your chances of getting hired.
+              </p>
+            </div>
+          )}
+
+          {activeTab === "improver" && (
+            <div>
+              <h2 className="text-2xl font-bold mb-3">
+                AI Resume Improver
+              </h2>
+
+              <p className="text-muted-foreground leading-relaxed">
+                Enhance your resume with AI-powered suggestions.
+                Improve wording, structure, clarity, and professionalism
+                to create a stronger and more attractive resume for recruiters.
+              </p>
+            </div>
+          )}
+
+          {activeTab === "interview" && (
+            <div>
+              <h2 className="text-2xl font-bold mb-3">
+                AI Interview Generator
+              </h2>
+
+              <p className="text-muted-foreground leading-relaxed">
+                Generate realistic interview questions tailored to your
+                resume and target job description. Practice technical
+                and behavioral questions with AI-generated sample answers.
+              </p>
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
       {activeTab === "analyzer" ? (
         <motion.div
           key="analyzer"
@@ -110,7 +180,7 @@ export default function Home() {
             )}
           </AnimatePresence>
         </motion.div>
-      ) : (
+      ) : activeTab === "improver" ? (
         <motion.div
           key="improver"
           initial={{ opacity: 0, y: 20 }}
@@ -119,6 +189,16 @@ export default function Home() {
           transition={{ duration: 0.4 }}
         >
           <ResumeImprover />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="interview"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4 }}
+        >
+          <InterviewGenerator />
         </motion.div>
       )}
     </div>

@@ -8,7 +8,7 @@ import { AnalyzeRequest } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2, FileText, UploadCloud, BriefcaseBusiness } from "lucide-react";
+import { Loader2, FileText, UploadCloud, BriefcaseBusiness, LineChart } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 
@@ -160,7 +160,10 @@ export function ResumeAnalyzer({ onSubmit, isLoading }: InputFormProps) {
                 Analyzing Match...
               </>
             ) : (
-              "Analyze Resume"
+              <>
+                <LineChart className="w-4 h-4 shrink-0" />
+                Analyze Resume
+              </>
             )}
           </Button>
         </div>

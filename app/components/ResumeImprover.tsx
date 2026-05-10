@@ -21,6 +21,7 @@ import {
   Sparkles,
   FileText,
   UploadCloud,
+  Wand2
 } from "lucide-react";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -348,7 +349,7 @@ export function ResumeImprover() {
                     </>
                   ) : (
                     <>
-                      <Sparkles className="mr-2 h-5 w-5" />
+                      <Wand2 className="w-4 h-4 shrink-0" />
                       Improve Resume
                     </>
                   )}
@@ -434,11 +435,10 @@ export function ResumeImprover() {
                           disabled={isLoading}
                         >
                           <RefreshCcw
-                            className={`h-4 w-4 ${
-                              isLoading
+                            className={`h-4 w-4 ${isLoading
                                 ? "animate-spin"
                                 : ""
-                            }`}
+                              }`}
                           />
                         </Button>
                       </div>

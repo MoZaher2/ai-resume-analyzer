@@ -59,3 +59,59 @@ ${resume}
 Job Description:
 ${jobDescription}
 `;
+
+export const getResumeImprovementPrompt = (resume: string, jobDescription: string) => `You are an expert ATS resume writer and senior technical recruiter.
+
+Your task:
+Rewrite and improve the following resume to better match the provided job description.
+
+Requirements:
+- Optimize for ATS systems
+- Improve wording and grammar
+- Use stronger action verbs
+- Add missing relevant keywords naturally
+- Keep the resume concise and professional
+- Maintain truthful realistic experience
+- Improve readability and formatting
+- Do NOT invent fake experience
+- Keep the response human and natural
+
+Return ONLY the improved resume text.
+No markdown block formatting (like \`\`\`).
+No explanations.
+
+Resume:
+${resume}
+
+Job Description:
+${jobDescription}`;
+
+export const getInterviewGeneratorPrompt = (resume: string, jobDescription: string) => `You are a senior technical interviewer and hiring manager.
+
+Generate 10 realistic interview questions based on the candidate's resume and target job description.
+
+Requirements:
+- Questions must match the job role
+- Include technical and behavioral questions
+- Answers should be concise and professional
+- Answers should sound human and confident
+- Keep answers short and easy to remember (maximum 3-5 lines)
+- Avoid generic textbook answers
+- Questions should feel realistic for an actual interview
+- Include problem-solving and experience-based questions
+
+Return ONLY valid JSON in this format:
+{
+  "questions": [
+    {
+      "question": "string",
+      "answer": "string"
+    }
+  ]
+}
+
+Resume:
+${resume}
+
+Job Description:
+${jobDescription}`;

@@ -1,3 +1,4 @@
+import { getResumeImprovementPrompt } from "@/lib/prompts";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
@@ -20,37 +21,11 @@ export async function POST(req: Request) {
     }
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const prompt = getResumeImprovementPrompt(resume, jobDescription);
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
-    const prompt = `You are an expert ATS resume writer and senior technical recruiter.
-
-Your task:
-Rewrite and improve the following resume to better match the provided job description.
-
-Requirements:
-- Optimize for ATS systems
-- Improve wording and grammar
-- Use stronger action verbs
-- Add missing relevant keywords naturally
-- Keep the resume concise and professional
-- Maintain truthful realistic experience
-- Improve readability and formatting
-- Do NOT invent fake experience
-- Keep the response human and natural
-
-Return ONLY the improved resume text.
-No markdown block formatting (like \`\`\`).
-No explanations.
-
-Resume:
-${resume}
-
-Job Description:
-${jobDescription}`;
 
     const streamingResp = await model.generateContentStream(prompt);
 
-    const encoder = new TextEncoder();
     const readableStream = new ReadableStream({
       async start(controller) {
         try {

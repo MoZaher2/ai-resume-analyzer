@@ -12,7 +12,7 @@ export function Hero() {
         className="text-center text-3xl font-extrabold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]"
       >
         Optimize your Resume with{" "}
-        <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-rose-800 to-stone-600 bg-clip-text text-transparent">
           AI Precision
         </span>
       </motion.h1>
