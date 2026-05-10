@@ -21,7 +21,12 @@ export default function Home() {
   const { mutate: analyze, isPending, data: analysis, error } = useAnalyzeResume();
   const [requestData, setRequestData] = useState<AnalyzeRequest | null>(null);
   const [activeTab, setActiveTab] = useState<"analyzer" | "improver" | "interview">("analyzer");
-
+  // Resume Improve State
+  const [improvedResume, setImprovedResume] = useState("");
+  // Interview Qustions State
+  const [allQuestions, setAllQuestions] = useState<
+    Array<{ question: string; answer: string }>
+  >([]);
   const handleSubmit = (data: AnalyzeRequest) => {
     setRequestData(data);
     analyze(data, {
@@ -188,7 +193,11 @@ export default function Home() {
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
         >
-          <ResumeImprover />
+          {/* <ResumeImprover /> */}
+          <ResumeImprover
+            improvedResume={improvedResume}
+            setImprovedResume={setImprovedResume}
+          />
         </motion.div>
       ) : (
         <motion.div
@@ -198,7 +207,7 @@ export default function Home() {
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
         >
-          <InterviewGenerator />
+          <InterviewGenerator allQuestions={allQuestions} setAllQuestions={setAllQuestions} />
         </motion.div>
       )}
     </div>

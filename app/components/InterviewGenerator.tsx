@@ -25,13 +25,13 @@ import { toast } from "sonner";
 import { InterviewQuestions } from "./InterviewQuestions";
 import { useInterviewQuestions } from "../hooks/useInterviewQuestions";
 
-export function InterviewGenerator() {
+export function InterviewGenerator({ allQuestions, setAllQuestions }: any) {
   const [isUploading, setIsUploading] = useState(false);
   const [pdfFileName, setPdfFileName] = useState<string | null>(null);
 
-  const [allQuestions, setAllQuestions] = useState<
-    Array<{ question: string; answer: string }>
-  >([]);
+  // const [allQuestions, setAllQuestions] = useState<
+  //   Array<{ question: string; answer: string }>
+  // >([]);
 
   const [hasGenerated, setHasGenerated] = useState(false);
 
@@ -238,7 +238,7 @@ export function InterviewGenerator() {
               type="submit"
               size="lg"
               className="w-full max-w-md h-12 text-lg font-semibold shadow-lg transition-all hover:scale-105"
-              disabled={!isValid || isPending || isUploading}
+              disabled={!isValid || isPending || isUploading || allQuestions.length > 0}
             >
               {isPending ? (
                 <>

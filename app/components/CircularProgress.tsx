@@ -11,7 +11,7 @@ export function CircularProgress({ score }: CircularProgressProps) {
   const [currentScore, setCurrentScore] = useState(0);
 
   useEffect(() => {
-    const duration = 1500;
+    const duration = 2500;
     const steps = 60;
     const stepTime = duration / steps;
     let currentStep = 0;

@@ -29,14 +29,13 @@ import { toast } from "sonner";
 
 import jsPDF from "jspdf";
 
-export function ResumeImprover() {
-  const [improvedResume, setImprovedResume] = useState("");
+export function ResumeImprover({ improvedResume, setImprovedResume }: any) {
+  // const [improvedResume, setImprovedResume] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [pdfFileName, setPdfFileName] = useState<string | null>(null);
 
-  const resultRef = useRef<HTMLDivElement>(null);
   const resultContainerRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -108,7 +107,12 @@ export function ResumeImprover() {
   const handleImprove = async (data: AnalyzeRequest) => {
     setIsLoading(true);
     setImprovedResume("");
-
+    setTimeout(() => {
+      resultContainerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
     try {
       const response = await fetch("/api/improve-resume", {
         method: "POST",
@@ -338,7 +342,8 @@ export function ResumeImprover() {
                   disabled={
                     !isValid ||
                     isLoading ||
-                    isUploading
+                    isUploading ||
+                    improvedResume.length > 0
                   }
                   className="w-full h-12 text-lg font-medium shadow-md transition-all hover:scale-[1.02]"
                 >
@@ -436,8 +441,8 @@ export function ResumeImprover() {
                         >
                           <RefreshCcw
                             className={`h-4 w-4 ${isLoading
-                                ? "animate-spin"
-                                : ""
+                              ? "animate-spin"
+                              : ""
                               }`}
                           />
                         </Button>
@@ -446,14 +451,71 @@ export function ResumeImprover() {
 
                     <CardContent className="p-0 flex-1 relative bg-white dark:bg-neutral-950">
                       <div
-                        ref={resultRef}
                         className="p-8 min-h-[600px] whitespace-pre-wrap font-sans text-sm md:text-base leading-relaxed text-neutral-900 dark:text-neutral-100 max-w-full overflow-x-auto"
                       >
                         {improvedResume ? (
                           improvedResume
                         ) : (
-                          <div className="space-y-4 animate-pulse">
-                            <div className="h-8 bg-muted rounded w-1/3 mx-auto mb-8" />
+                          // CV Skeleton UI
+                          <div className="animate-pulse space-y-6">
+                            {/* Header */}
+                            <div className="border rounded-2xl space-y-3 text-center shadow-sm">
+                              <div className="h-8 bg-muted rounded w-1/3" />
+                              <div className="h-4 bg-muted rounded w-2/3" />
+                            </div>
+
+                            {/* CV Preview */}
+                            <div className="p-6 space-y-6 bg-background shadow-sm">
+                              {/* Name */}
+                              <div className="space-y-2">
+                                <div className="h-8 bg-muted rounded w-1/2" />
+                                <div className="h-4 bg-muted rounded w-1/3" />
+                              </div>
+
+                              {/* Summary */}
+                              <div className="space-y-2">
+                                <div className="h-5 bg-muted rounded w-1/4 mb-3" />
+                                <div className="h-4 bg-muted rounded w-full" />
+                                <div className="h-4 bg-muted rounded w-11/12" />
+                                <div className="h-4 bg-muted rounded w-10/12" />
+                              </div>
+
+                              {/* Experience */}
+                              <div className="space-y-3">
+                                <div className="h-5 bg-muted rounded w-1/4 mb-2" />
+
+                                {[1, 2].map((item) => (
+                                  <div key={item} className="space-y-2">
+                                    <div className="flex justify-between">
+                                      <div className="h-4 bg-muted rounded w-1/3" />
+                                      <div className="h-4 bg-muted rounded w-20" />
+                                    </div>
+
+                                    <div className="h-4 bg-muted rounded w-1/4" />
+
+                                    <div className="space-y-2 pt-1">
+                                      <div className="h-3 bg-muted rounded w-full" />
+                                      <div className="h-3 bg-muted rounded w-5/6" />
+                                      <div className="h-3 bg-muted rounded w-4/6" />
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+
+                              {/* Skills */}
+                              <div className="space-y-3">
+                                <div className="h-5 bg-muted rounded w-1/5" />
+
+                                <div className="flex flex-wrap gap-2">
+                                  {[1, 2, 3, 4, 5, 6].map((item) => (
+                                    <div
+                                      key={item}
+                                      className="h-8 bg-muted rounded-full w-24"
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         )}
                       </div>
