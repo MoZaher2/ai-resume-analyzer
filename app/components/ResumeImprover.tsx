@@ -29,7 +29,15 @@ import { toast } from "sonner";
 
 import jsPDF from "jspdf";
 
-export function ResumeImprover({ improvedResume, setImprovedResume }: any) {
+interface ResumeImproverProps {
+  improvedResume: string;
+  setImprovedResume: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function ResumeImprover({
+  improvedResume,
+  setImprovedResume,
+}: ResumeImproverProps) {
   // const [improvedResume, setImprovedResume] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);

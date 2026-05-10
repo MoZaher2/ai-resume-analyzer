@@ -22,7 +22,7 @@ export default function Home() {
   const [requestData, setRequestData] = useState<AnalyzeRequest | null>(null);
   const [activeTab, setActiveTab] = useState<"analyzer" | "improver" | "interview">("analyzer");
   // Resume Improve State
-  const [improvedResume, setImprovedResume] = useState("");
+  const [improvedResume, setImprovedResume] = useState<string>("");
   // Interview Qustions State
   const [allQuestions, setAllQuestions] = useState<
     Array<{ question: string; answer: string }>
