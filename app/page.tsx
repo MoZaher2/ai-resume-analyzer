@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Hero } from "./components/Hero";
 import { ResumeAnalyzer } from "./components/ResumeAnalyzer";
 import { useAnalyzeResume } from "./hooks/useAnalyzeResume";
@@ -16,11 +16,22 @@ import { toast } from "sonner";
 import { Wand2, LineChart, MessageSquare } from "lucide-react";
 import { InterviewGenerator } from "./components/InterviewGenerator";
 import { useInterviewQuestions } from "./hooks/useInterviewQuestions";
+import Link from "next/link";
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<"analyzer" | "improver" | "interview">("analyzer");
+  // Go to selected Tap Section
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const validTabs = ["analyzer", "improver", "interview"] as const;
+
+    if (validTabs.includes(hash as (typeof validTabs)[number])) {
+      setActiveTab(hash as "analyzer" | "improver" | "interview");
+    }
+  }, []);
+
   const { mutate: analyze, isPending, data: analysis, error } = useAnalyzeResume();
   const [requestData, setRequestData] = useState<AnalyzeRequest | null>(null);
-  const [activeTab, setActiveTab] = useState<"analyzer" | "improver" | "interview">("analyzer");
   // Resume Improve State
   const [improvedResume, setImprovedResume] = useState<string>("");
   // Interview Qustions State
@@ -46,7 +57,8 @@ export default function Home() {
       <div className="flex justify-center mt-8 mb-12 px-2">
         <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-2 p-2 bg-muted/50 rounded-2xl border border-border/50 backdrop-blur-xl">
 
-          <button
+          <Link
+            href="/#analyzer"
             onClick={() => setActiveTab("analyzer")}
             className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 w-full sm:w-auto ${activeTab === "analyzer"
               ? "bg-background shadow-sm text-primary"
@@ -54,10 +66,14 @@ export default function Home() {
               }`}
           >
             <LineChart className="w-4 h-4 shrink-0" />
-            <span className="truncate">Resume Analyzer</span>
-          </button>
 
-          <button
+            <span className="truncate">
+              Resume Analyzer
+            </span>
+          </Link>
+
+          <Link
+            href="/#improver"
             onClick={() => setActiveTab("improver")}
             className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 w-full sm:w-auto ${activeTab === "improver"
               ? "bg-background shadow-sm text-primary"
@@ -66,9 +82,10 @@ export default function Home() {
           >
             <Wand2 className="w-4 h-4 shrink-0" />
             <span className="truncate">Resume Improver</span>
-          </button>
+          </Link>
 
-          <button
+          <Link
+            href="/#interview"
             onClick={() => setActiveTab("interview")}
             className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 w-full sm:w-auto ${activeTab === "interview"
               ? "bg-background shadow-sm text-primary"
@@ -77,7 +94,7 @@ export default function Home() {
           >
             <MessageSquare className="w-4 h-4 shrink-0" />
             <span className="truncate">Interview Generator</span>
-          </button>
+          </Link>
 
         </div>
       </div>
