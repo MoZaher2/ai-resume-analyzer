@@ -112,6 +112,6 @@ AI Resume Analyzer: [https://ai-resume-analyzer-beryl-theta.vercel.app/](https:/
 
 GitHub: [https://github.com/MoZaher2](https://github.com/MoZaher2)
 
-LinkedIn: [www.linkedin.com/in/mohamedzaher-dev](www.linkedin.com/in/mohamedzaher-dev)
+LinkedIn: [https://www.linkedin.com/in/mohamedzaher-dev/](https://www.linkedin.com/in/mohamedzaher-dev/)
 
 ---
